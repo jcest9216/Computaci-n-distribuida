@@ -1,1 +1,1 @@
-# Computaci-n-distribuida
+# Proyecto de computación distribuida
