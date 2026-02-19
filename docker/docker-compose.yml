@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  c1:
+    build: .
+    container_name: c1
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    command: sleep infinity
+    restart: unless-stopped
+
+  c2:
+    build: .
+    container_name: c2
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    command: sleep infinity
+    restart: unless-stopped
+
+  c3:
+    build: .
+    container_name: c3
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    command: sleep infinity
+    restart: unless-stopped
+
+  c4:
+    build: .
+    container_name: c4
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    command: sleep infinity
+    restart: unless-stopped
