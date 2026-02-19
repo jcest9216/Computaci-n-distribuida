@@ -1,0 +1,32 @@
+# Archivos generados por Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# Directorios de IDEs
+.vscode/
+.idea/
+*.iml
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Archivos de log
+*.log
+*.log.*
+
+# Directorios de dependencias (si no usas Cargo)
+/vendor/
+
+# Archivos de entorno
+.env
+.env.*
+!.env.example
+
+# Archivos de configuración local
+config.local.toml
+secrets.toml
