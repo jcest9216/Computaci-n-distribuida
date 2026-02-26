@@ -15,13 +15,15 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN mkdir -p /etc/wireguard
 
-RUN wg genkey | tee /etc/wireguard/private.key | wg pubkey > /etc/wireguard/public.key
+RUN echo '#!/bin/bash\n\
+    wg genkey | tee /etc/wireguard/private.key | wg pubkey > /etc/wireguard/public.key\n\
+    ' > /usr/local/bin/generar-llaves && chmod +x /usr/local/bin/generar-llaves
+
 
 RUN echo "[Interface]" > /etc/wireguard/wg0.conf && \
     echo "Address = SUSTITUIR_POR_IP" >> /etc/wireguard/wg0.conf && \
-    echo "PrivateKey = $(cat /etc/wireguard/private.key)" >> /etc/wireguard/wg0.conf && \
+    echo "PrivateKey = SUSTITUIR_POR_PRIVATE_KEY" >> /etc/wireguard/wg0.conf && \
     echo "" >> /etc/wireguard/wg0.conf && \
-    echo "#SERVER" >> /etc/wireguard/wg0.conf && \
     echo "[Peer]" >> /etc/wireguard/wg0.conf && \
     echo "PublicKey = iQRu1M/ijoX5KsnjhCvxOrz9VtW72dBXXtKkXzoscEo=" >> /etc/wireguard/wg0.conf && \
     echo "Endpoint = SUSTITUIR_POR_IP_PUBLICA_DEL_SERVER:51820" >> /etc/wireguard/wg0.conf && \
