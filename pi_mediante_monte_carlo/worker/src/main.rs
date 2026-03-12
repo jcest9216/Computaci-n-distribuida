@@ -73,11 +73,11 @@ fn handle_client(mut stream: TcpStream) {
 }
 
 fn main() {
-    let listener =
-        TcpListener::bind("0.0.0.0:9000").expect("No se pudo iniciar el worker en el puerto 9000");
+    let args: Vec<String> = std::env::args().collect();
+    let port = &args[1];
 
-    println!("Worker escuchando en puerto 9000...");
-
+    let address = format!("0.0.0.0:{}", port);
+    let listener = TcpListener::bind(address).unwrap();
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
