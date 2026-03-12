@@ -74,7 +74,11 @@ fn handle_client(mut stream: TcpStream) {
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
-    let port = &args[1];
+    let port = if args.len() > 1 {
+        &args[1];
+    } else {
+        "9000"
+    };
 
     let address = format!("0.0.0.0:{}", port);
     let listener = TcpListener::bind(address).unwrap();
