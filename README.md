@@ -165,3 +165,42 @@ Requisitos de software.
 - Instrucciones para desplegar contenedores.
 - Instrucciones para compilar y ejecutar el sistema distribuido en Rust.
 - Notas importantes y supuestos. -->
+
+## Instrucciones para levantar la VPN
+1. Instalar *WireGuard*.
+
+    Si el SO es una distribución basada en Debian, el comando para instalarlo es *apt install wireguard*.
+
+    Si se trata de un contenedor de *Docker*, no hace falta instalarlo: al construirlo,
+    por medio de docker-compose, se instala automáticamente.
+  
+  
+
+2. Crear un archivo de configuración; el nombre del archivo debe ser *wg0.conf*; por default, wireguard
+  revisa el directorio */etc/wireguard/* para leer el archivo, por lo que se recomienda crearlo allí.
+
+    En caso de que se trate de un contenedor de *Docker*, no hace falta crearlo: se crea automáticamente,
+    en la dirección por default, al momento de construirlo. El archivo tiene escrito un *boilerplate* que ya tiene
+    información importante, como la *IP* del nodo central o la llave pública de este, por ejemplo. Sin
+    embargo, sí hay que actualizar ciertas partes del *boilerplate*, como el endpoint del nodo central, el cual suele
+    variar.
+
+3. Generar el par de llaves.
+
+    El comando pertinente es *wg genkey | tee privatekey | wg pubkey > publickey*.
+
+    Si se trata de un contenedor de *Docker*, una vez creado, el contenedor debería tener un script, dentro del
+    directorio */usr/local/bin/*, que, al ejecutarse, genera las dos llaves y las guarda en el directorio
+    */etc/wireguard/*.
+
+    La llave privada debe indicarse en el campo correspondiente del archivo de configuración; la llave pública debe
+    proporcionarse a los peers del nodo.
+
+4. Levantar la VPN.
+
+    El comando *wg quick-up wg0* activa la configuración de wireguard de un nodo. Si la red tiene cuatro nodos,
+    los cuatro deben ejecutar el comando.
+
+    Si la dirección del archivo *wg0.conf* no es
+    */etc/wireguard/*, se debe indicar en el comando, antes de escribir *wg0*, la dirección, absoluta o relativa,
+    del directorio en el que se encuentra el archivo.
