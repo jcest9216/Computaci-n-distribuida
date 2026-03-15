@@ -204,3 +204,51 @@ Requisitos de software.
     Si la dirección del archivo *wg0.conf* no es
     */etc/wireguard/*, se debe indicar en el comando, antes de escribir *wg0*, la dirección, absoluta o relativa,
     del directorio en el que se encuentra el archivo.
+
+
+## Instrucciones para desplegar contenedores.
+1. Instalar *Docker*.
+
+    Las instrucciones para instalar *Docker* pueden encontrarse en el siguiente link 
+    (https://docs.docker.com/get-started/get-docker/)
+
+2. Instalar Docker Compose.
+
+    *Docker Compose* tiene dos formas: plugin y standalone. Si la instalación de *Docker* es antigua, muy probablemente
+    *Docker Compose* esté instalado; si la instalación de *Docker* es reciente, quizás *Docker Compose* no esté
+    instalado.
+
+    Para revisar si está instalado como plugin, ejecuta: *docker compose version*
+    Para revisar si está instalado como plugin, ejecuta: *docker-compose --version*
+
+    Para instalarlo en su versión plugin, ejecuta: *apt install docker-compose-plugin*
+    Para instarlo en su versión standalone, ejecuta: *apt install docker-compose*
+
+3. Construir las imágenes y crear los contenedores.
+
+    Dentro del directorio */Docker/*, el cual contiene dos archivos: *Dockerfile* y *Docker-compose.yml*, ejecuta
+    *docker compose up -d*.
+
+## Instrucciones para compilar y ejecutar el sistema distribuido
+
+1. Compilar ambos códigos
+
+    El proyecto de Rust se divide en dos proyectos: *coordinator* y *worker*.
+    Para compilar ambos al mismo tiempo ejecuta, dentro del proyecto de Rust,
+    y fuera de coordinator y de worker, *cargo build*.
+
+2. Ejecutar ejecutables.
+
+    Después de compilar ambos proyectos, los ejecutables de cada uno se encontrarán en el directorio */target/debug/* del
+    proyecto general de Rust. El ejecutable llamado *coordinator* debe ser ejucutado únicamente por el nodo central; el
+    ejecutable llamado *worker* debe ser ejecutado por el resto de los nodos.
+
+    Sin embargo, los nodos restantes son contenedores, por lo que hay que distribuir el ejecutable a cada uno de ellos.
+
+    Para ello, puedes hacerlo manualmente, mediante *docker cp*, o por medio del script llamado *update_docker.sh*, el cual
+    puedes encontrar en el directorio de scripts del repositorio.
+    
+    El ejecutable *coordinator* se ejecuta al último, es decir, primero los workers ejecutan su ejecutable y por último el
+    nodo central.
+
+## Notas importantes y supuestos.
