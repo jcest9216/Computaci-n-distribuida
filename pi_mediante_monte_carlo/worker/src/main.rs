@@ -75,7 +75,7 @@ fn handle_client(mut stream: TcpStream) {
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     let port = if args.len() > 1 {
-        &args[1];
+        &args[1].as_str()
     } else {
         "9000"
     };
