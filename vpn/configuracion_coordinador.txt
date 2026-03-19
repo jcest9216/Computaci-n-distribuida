@@ -1,0 +1,80 @@
+[Interface]
+Address = 10.0.0.1/24
+PrivateKey = <PRIVATE_KEY_SERVIDOR>
+ListenPort = 51820
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_1>
+AllowedIPs = 10.0.0.2/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_2>
+AllowedIPs = 10.0.0.3/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_3>
+AllowedIPs = 10.0.0.4/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_4>
+AllowedIPs = 10.0.0.5/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_5>
+AllowedIPs = 10.0.0.6/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_6>
+AllowedIPs = 10.0.0.7/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_7>
+AllowedIPs = 10.0.0.8/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_8>
+AllowedIPs = 10.0.0.9/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_9>
+AllowedIPs = 10.0.0.10/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_10>
+AllowedIPs = 10.0.0.11/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_11>
+AllowedIPs = 10.0.0.12/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_12>
+AllowedIPs = 10.0.0.13/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_13>
+AllowedIPs = 10.0.0.14/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_14>
+AllowedIPs = 10.0.0.15/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_15>
+AllowedIPs = 10.0.0.16/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_16>
+AllowedIPs = 10.0.0.17/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_17>
+AllowedIPs = 10.0.0.18/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_18>
+AllowedIPs = 10.0.0.19/32
+
+[Peer]
+PublicKey = <PUBLIC_KEY_WORKER_19>
+AllowedIPs = 10.0.0.20/32

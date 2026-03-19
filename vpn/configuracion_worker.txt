@@ -1,0 +1,9 @@
+[Interface]
+Address = <IP_WORKER>
+PrivateKey = <PRIVATE_KEY_WORKER>
+
+[Peer]
+PublicKey = <PUBLIC_KEY_SERVIDOR>
+Endpoint = <IP_FISICA_SERVIDOR>:51820
+AllowedIPs = 10.0.0.0/24
+PersistentKeepalive = 25
