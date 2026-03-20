@@ -51,6 +51,14 @@ El objetivo no es obtener un valor más preciso de π por necesidad práctica, s
 modelo matemático controlado que represente simulaciones probabilísticas reales
 empleadas en cómputo científico distribuido.
 
+### Requisitos de Software
+- Hyper-V
+- WireGuard
+- Docker Engine
+- Docker Compose
+- Rust
+- Git
+
 ## Planeación y coordinación
 ### Metodología
 Para nuestro proyecto elegimos una combinación de dos metodologías: Scrum y Kanban.
