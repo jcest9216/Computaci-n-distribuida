@@ -167,13 +167,6 @@ los resultados al servidor. Este programa funcionó correctamente, lo cual, infe
 dará una base sólida para implementar el algoritmo que seleccionamos, Cálculo de pi por
 método Monte Carlo.
 
-<!-- Pendiente:
-Requisitos de software.
-- Instrucciones para levantar la VPN (resumidas).
-- Instrucciones para desplegar contenedores.
-- Instrucciones para compilar y ejecutar el sistema distribuido en Rust.
-- Notas importantes y supuestos. -->
-
 ## Instrucciones para levantar la VPN
 1. Instalar *WireGuard*.
 
@@ -258,5 +251,3 @@ Requisitos de software.
     
     El ejecutable *coordinator* se ejecuta al último, es decir, primero los workers ejecutan su ejecutable y por último el
     nodo central.
-
-## Notas importantes y supuestos.
