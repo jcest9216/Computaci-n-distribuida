@@ -173,3 +173,90 @@ Requisitos de software.
 - Instrucciones para desplegar contenedores.
 - Instrucciones para compilar y ejecutar el sistema distribuido en Rust.
 - Notas importantes y supuestos. -->
+
+## Instrucciones para levantar la VPN
+1. Instalar *WireGuard*.
+
+    Si el SO es una distribución basada en Debian, el comando para instalarlo es *apt install wireguard*.
+
+    Si se trata de un contenedor de *Docker*, no hace falta instalarlo: al construirlo,
+    por medio de docker-compose, se instala automáticamente.
+  
+  
+
+2. Crear un archivo de configuración; el nombre del archivo debe ser *wg0.conf*; por default, wireguard
+  revisa el directorio */etc/wireguard/* para leer el archivo, por lo que se recomienda crearlo allí.
+
+    En caso de que se trate de un contenedor de *Docker*, no hace falta crearlo: se crea automáticamente,
+    en la dirección por default, al momento de construirlo. El archivo tiene escrito un *boilerplate* que ya tiene
+    información importante, como la *IP* del nodo central o la llave pública de este, por ejemplo. Sin
+    embargo, sí hay que actualizar ciertas partes del *boilerplate*, como el endpoint del nodo central, el cual suele
+    variar.
+
+3. Generar el par de llaves.
+
+    El comando pertinente es *wg genkey | tee privatekey | wg pubkey > publickey*.
+
+    Si se trata de un contenedor de *Docker*, una vez creado, el contenedor debería tener un script, dentro del
+    directorio */usr/local/bin/*, que, al ejecutarse, genera las dos llaves y las guarda en el directorio
+    */etc/wireguard/*.
+
+    La llave privada debe indicarse en el campo correspondiente del archivo de configuración; la llave pública debe
+    proporcionarse a los peers del nodo.
+
+4. Levantar la VPN.
+
+    El comando *wg quick-up wg0* activa la configuración de wireguard de un nodo. Si la red tiene cuatro nodos,
+    los cuatro deben ejecutar el comando.
+
+    Si la dirección del archivo *wg0.conf* no es
+    */etc/wireguard/*, se debe indicar en el comando, antes de escribir *wg0*, la dirección, absoluta o relativa,
+    del directorio en el que se encuentra el archivo.
+
+
+## Instrucciones para desplegar contenedores.
+1. Instalar *Docker*.
+
+    Las instrucciones para instalar *Docker* pueden encontrarse en el siguiente link 
+    (https://docs.docker.com/get-started/get-docker/)
+
+2. Instalar Docker Compose.
+
+    *Docker Compose* tiene dos formas: plugin y standalone. Si la instalación de *Docker* es antigua, muy probablemente
+    *Docker Compose* esté instalado; si la instalación de *Docker* es reciente, quizás *Docker Compose* no esté
+    instalado.
+
+    Para revisar si está instalado como plugin, ejecuta: *docker compose version*
+    Para revisar si está instalado como plugin, ejecuta: *docker-compose --version*
+
+    Para instalarlo en su versión plugin, ejecuta: *apt install docker-compose-plugin*
+    Para instarlo en su versión standalone, ejecuta: *apt install docker-compose*
+
+3. Construir las imágenes y crear los contenedores.
+
+    Dentro del directorio */Docker/*, el cual contiene dos archivos: *Dockerfile* y *Docker-compose.yml*, ejecuta
+    *docker compose up -d*.
+
+## Instrucciones para compilar y ejecutar el sistema distribuido
+
+1. Compilar ambos códigos
+
+    El proyecto de Rust se divide en dos proyectos: *coordinator* y *worker*.
+    Para compilar ambos al mismo tiempo ejecuta, dentro del proyecto de Rust,
+    y fuera de coordinator y de worker, *cargo build*.
+
+2. Ejecutar ejecutables.
+
+    Después de compilar ambos proyectos, los ejecutables de cada uno se encontrarán en el directorio */target/debug/* del
+    proyecto general de Rust. El ejecutable llamado *coordinator* debe ser ejucutado únicamente por el nodo central; el
+    ejecutable llamado *worker* debe ser ejecutado por el resto de los nodos.
+
+    Sin embargo, los nodos restantes son contenedores, por lo que hay que distribuir el ejecutable a cada uno de ellos.
+
+    Para ello, puedes hacerlo manualmente, mediante *docker cp*, o por medio del script llamado *update_docker.sh*, el cual
+    puedes encontrar en el directorio de scripts del repositorio.
+    
+    El ejecutable *coordinator* se ejecuta al último, es decir, primero los workers ejecutan su ejecutable y por último el
+    nodo central.
+
+## Notas importantes y supuestos.
